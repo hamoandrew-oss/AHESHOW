@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDLINE — pricing & founding pilot</title>
+<meta name="description" content="GRIDLINE pricing — construction project management by Andrew Hamilton Engineering. Founding pilot open now.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0C1523; --navy2:#111C2E; --ink:#151F2B; --paper:#F2F3F5; --panel:#FFFFFF;
+    --sky:#2E86BE; --sky-bright:#41A8DE; --silver:#8496A6; --line:rgba(18,30,44,.14);
+    --grey:#5E6B7A; --ordered:#4A7FC9; --delayed:#C74B33; --green:#2E9E62; --amber:#D98E2B;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--sky);color:#fff}
+  h1,h2{font-family:'Archivo Black',sans-serif;font-weight:400;line-height:1.05;letter-spacing:-.01em}
+  h1{font-size:clamp(2.3rem,6.5vw,4.6rem)}
+  h2{font-size:clamp(1.7rem,4vw,2.8rem);margin-bottom:.55em}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--sky);margin-bottom:18px}
+  .dark .eyebrow{color:var(--sky-bright)}
+  p.lead{font-size:clamp(1rem,1.5vw,1.18rem);color:#42505E;max-width:36em}
+  .dark p.lead{color:#9FB0C0}
+  section{padding:clamp(70px,10vh,120px) 24px;overflow:hidden}
+  .wrap{max-width:1120px;margin:0 auto}
+  .dark{background:var(--navy);color:#F1F5F9}
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+  .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.22s}.rv.d3{transition-delay:.34s}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+  .reg{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--silver);border-top:1px solid var(--line);padding-top:12px;margin-bottom:44px}
+  .dark .reg{border-color:rgba(255,255,255,.14)}
+  a.btn{display:inline-block;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:14px 26px;background:var(--sky);color:#fff}
+  a.btn.ghost{background:transparent;color:var(--sky);border:1.5px solid var(--sky)}
+  .dark a.btn.ghost{color:var(--sky-bright);border-color:var(--sky-bright)}
+  /* pricing grid */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  @media(max-width:900px){.tiers{grid-template-columns:1fr}}
+  .tier{background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column}
+  .tier.hot{border:2px solid var(--sky);position:relative}
+  .tier .flag{position:absolute;top:-11px;left:18px;background:var(--sky);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;padding:3px 10px}
+  .tier .th{padding:22px 22px 16px;border-bottom:1px solid var(--line)}
+  .tier .th .nm{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--silver)}
+  .tier .price{font-family:'Archivo Black',sans-serif;font-size:2.4rem;margin:10px 0 2px}
+  .tier .price small{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--silver);letter-spacing:.04em}
+  .tier .was{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--silver)}
+  .tier ul{list-style:none;padding:18px 22px;flex:1}
+  .tier li{padding:5px 0 5px 22px;position:relative;font-size:13.5px}
+  .tier li::before{content:"";position:absolute;left:0;top:12px;width:11px;height:11px;border:2.5px solid var(--sky);border-top:none;border-right:none;transform:rotate(-45deg) translateY(-3px)}
+  .tier li.na{color:var(--silver)}
+  .tier li.na::before{border-color:#C7CFD6}
+  .tier .cta{padding:0 22px 22px}
+  .tier .cta a{width:100%;text-align:center}
+  .note{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--silver);margin-top:16px}
+  /* pilot terms */
+  .deal{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+  @media(max-width:880px){.deal{grid-template-columns:1fr}}
+  .dealcard{background:var(--navy2);border:1px solid rgba(255,255,255,.12);padding:24px}
+  .dealcard b{display:block;font-size:15px;margin-bottom:12px;letter-spacing:.04em}
+  .dealcard ol{padding-left:20px}
+  .dealcard li{margin:7px 0;font-size:13.5px;color:#C7D2DE}
+  .steps{counter-reset:s;margin-top:36px;display:grid;gap:0}
+  .step{display:flex;gap:18px;padding:16px 0;border-top:1px solid var(--line);align-items:baseline}
+  .step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:'Archivo Black',sans-serif;font-size:1.5rem;color:var(--sky)}
+  .faq{margin-top:36px}
+  .faq details{border-top:1px solid var(--line);padding:14px 0}
+  .faq summary{font-weight:700;font-size:14.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  .faq summary::after{content:"+";font-family:'Archivo Black',sans-serif;color:var(--sky)}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{color:#42505E;font-size:13.5px;margin-top:8px;max-width:52em}
+  footer{background:#080E18;color:var(--silver);padding:34px 24px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--sky-bright);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="dark" style="padding-top:clamp(90px,14vh,160px)">
+  <div class="wrap">
+    <div class="reg rv in"><span>GRIDLINE</span><span>PRICING · REV A</span></div>
+    <div class="eyebrow rv in">SIMPLE, LIKE A DAYWORK SHEET</div>
+    <h1 class="rv in d1">One price.<br>The whole job.<br><em style="font-style:normal;color:var(--sky-bright)">Every user.</em></h1>
+    <p class="lead rv in d2" style="margin-top:22px">No per-seat maths, no modules to unlock, no "contact sales" for the good bits. A company pays one flat rate and every fitter, QS and site manager is on it. Right now, the founding pilot is open — free, limited to ten firms.</p>
+    <div class="rv in d3" style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="#pilot">Join the founding pilot</a>
+      <a class="btn ghost" href="#pricing">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="reg rv"><span>PRICING</span><span>LOCKS AT ACCOUNTS LAUNCH</span></div>
+    <h2 class="rv">Three ways in.</h2>
+    <p class="lead rv d1">Prices apply when team accounts launch. Until then, everything is free — and pilot firms keep the founding rate for life.</p>
+
+    <div class="tiers">
+      <div class="tier rv d1">
+        <div class="th">
+          <span class="nm">SOLO</span>
+          <div class="price">£0 <small>FOREVER</small></div>
+          <div class="was">one device · your data stays yours</div>
+        </div>
+        <ul>
+          <li>Every module — parts, drawings, 3D, programme, snags, subcontractors, handover</li>
+          <li>ACC checksheet import</li>
+          <li>Letterhead PDF exports</li>
+          <li>AI imports &amp; briefs — bring your own API key</li>
+          <li class="na">No team sync or shared registers</li>
+          <li class="na">No accounts, roles or invites</li>
+        </ul>
+        <div class="cta"><a class="btn ghost" href="https://hamoandrew-oss.github.io/AHE/">Use it today</a></div>
+      </div>
+
+      <div class="tier hot rv d2">
+        <div class="flag">MOST FIRMS</div>
+        <div class="th">
+          <span class="nm">COMPANY</span>
+          <div class="price">£129<small>/MO</small></div>
+          <div class="was">founding pilot firms: £79/mo, locked for life</div>
+        </div>
+        <ul>
+          <li>Everything in Solo</li>
+          <li><b>Unlimited users</b> — office and site on one live register</li>
+          <li>Accounts, invites &amp; roles — view-only / edit / admin, per-tab access, download control</li>
+          <li>Team sync across devices, offline-first on site</li>
+          <li>AI included — no API key faff</li>
+          <li>ACC live connection (drawings, RFIs, forms) as it ships</li>
+          <li>Priority support from the people who build it</li>
+        </ul>
+        <div class="cta"><a class="btn" href="#pilot">Get the founding rate</a></div>
+      </div>
+
+      <div class="tier rv d3">
+        <div class="th">
+          <span class="nm">MAIN CONTRACTOR</span>
+          <div class="price" style="font-size:1.7rem;padding-top:8px">Let's talk</div>
+          <div class="was">per-project or supply-chain rollout</div>
+        </div>
+        <ul>
+          <li>Everything in Company</li>
+          <li>Roll GRIDLINE down your supply chain — subbies' registers feed your dashboard</li>
+          <li>Portfolio reporting across projects</li>
+          <li>Deep ACC / Autodesk integration</li>
+          <li>Onboarding for your package contractors</li>
+        </ul>
+        <div class="cta"><a class="btn ghost" href="mailto:hamo.andrew@gmail.com?subject=GRIDLINE%20—%20main%20contractor">Start a conversation</a></div>
+      </div>
+    </div>
+    <div class="note">ANNUAL: PAY FOR 10 MONTHS, GET 12 · VAT NOT INCLUDED · CANCEL ANY TIME, YOUR DATA EXPORTS WITH YOU</div>
+  </div>
+</section>
+
+<!-- ══ PILOT ══ -->
+<section class="dark" id="pilot">
+  <div class="wrap">
+    <div class="reg rv"><span>FOUNDING PILOT</span><span>10 FIRMS · OPEN NOW</span></div>
+    <h2 class="rv">Free for the pilot.<br>£79/month for life after it.</h2>
+    <p class="lead rv d1">Ten steel, cladding and civils firms get GRIDLINE free while we finish team accounts — set up personally, shaped around how you actually run jobs. In return you tell us the truth about it.</p>
+
+    <div class="deal">
+      <div class="dealcard rv d1">
+        <b>YOU GET</b>
+        <ol>
+          <li>The full app, free, for the length of the pilot (8–12 weeks)</li>
+          <li>A one-hour setup call — your live job loaded in, material lists imported, handover file built</li>
+          <li>A direct line to the builder — not a ticket queue</li>
+          <li>Your feature requests at the front of the queue</li>
+          <li>The founding rate — £79/month, locked for as long as you stay — when accounts launch</li>
+        </ol>
+      </div>
+      <div class="dealcard rv d2">
+        <b>WE ASK</b>
+        <ol>
+          <li>Run at least one real job through it — not a toy</li>
+          <li>Fifteen minutes of honest feedback a fortnight</li>
+          <li>Tell us the moment something's wrong, clumsy or missing</li>
+          <li>If it earns it: a short testimonial and your logo on the site</li>
+          <li>If it doesn't: tell us why — that's worth as much</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="rv d2" style="margin-top:34px">
+      <a class="btn" href="mailto:hamo.andrew@gmail.com?subject=GRIDLINE%20founding%20pilot&body=Firm%3A%0ATrade%3A%0ACrew%20size%3A%0AA%20job%20we%27d%20run%20on%20it%3A">Claim a pilot place</a>
+      <span class="mono" style="font-size:10px;letter-spacing:.12em;color:var(--silver);margin-left:14px">ONE EMAIL — FIRM, TRADE, CREW SIZE, THE JOB YOU'D RUN ON IT</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY THIS PRICE ══ -->
+<section>
+  <div class="wrap">
+    <div class="reg rv"><span>THE MATHS</span><span>WHY £129</span></div>
+    <h2 class="rv">Priced against one mistake.</h2>
+    <p class="lead rv d1">£129 a month is under £1,600 a year — roughly one wasted trip to site for missing steel, one re-typed handover weekend, or one payment argument you couldn't evidence. The register that prevents any single one of those has paid for the year. Per-seat tools punish you for putting the fitters on the system; flat pricing means the whole crew is on it, which is the only way a live register works.</p>
+
+    <div class="steps">
+      <div class="step"><div><b>Procore-class platforms</b> — £4,000+ a year and a sales call to find that out. Built for tier ones, priced like it.</div></div>
+      <div class="step"><div><b>Field apps per-seat</b> — £25–60 per user per month. Ten people on site and you're at £5k/yr before the office logs in.</div></div>
+      <div class="step"><div><b>GRIDLINE</b> — £129 a month, everyone on, built by a contractor who erects frames for a living. The paperwork becomes the by-product.</div></div>
+    </div>
+
+    <div class="faq rv d1">
+      <details><summary>Is my data safe?</summary><p>Today, in solo mode, your data lives in your own browser — it never touches our servers, which is as private as it gets. Team accounts add a secured, UK/EU-hosted database with server-enforced roles, and your data exports with one click whenever you want out. We're contractors: we wouldn't put our own subcontractor payment records anywhere we didn't trust, and ours run on this.</p></details>
+      <details><summary>Why is the app free right now?</summary><p>Because charging money means accounts, billing and support obligations, and we'd rather finish those properly than fake them. The solo app is complete and genuinely free; the pilot bridges the gap; pricing starts when team accounts are real.</p></details>
+      <details><summary>What does the ACC integration do?</summary><p>Today: import your Form detail report and 451 checksheets land in the handover file in one click, statuses updating on every re-import. Coming: live connection — drawings revisions, RFIs, and forms syncing without the export step.</p></details>
+      <details><summary>What happens if you disappear?</summary><p>Fair question to ask any small vendor. Your data is exportable at any time, and the solo app runs entirely in your browser without our servers even existing. You are never locked in and never locked out.</p></details>
+      <details><summary>We're bigger than 15 people — does it still fit?</summary><p>Probably, and the flat price gets more comical the bigger your crew. If you're a main contractor wanting your supply chain on it, that's the third column — talk to us.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>GRIDLINE · ANDREW HAMILTON ENGINEERING</span>
+  <span><a href="https://hamoandrew-oss.github.io/AHE/showcase.html">PRODUCT</a> · <a href="https://hamoandrew-oss.github.io/AHE/">OPEN THE APP</a></span>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
