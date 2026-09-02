@@ -8,6 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:55;background:rgba(12,21,35,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+  nav .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:11px 24px}
+  nav .lg{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#F1F5F9;text-decoration:none}
+  nav a.lnk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9FB0C0;text-decoration:none}
+  nav a.lnk:hover{color:#fff}
+  nav .sp{flex:1}
+  nav a.app{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;color:#fff;background:#2274A8;text-decoration:none;padding:8px 16px}
+  @media(max-width:760px){nav a.lnk{display:none}nav .in{gap:10px}}
+
   :root{
     --navy:#0C1523; --navy2:#111C2E; --ink:#151F2B; --paper:#F2F3F5; --panel:#FFFFFF;
     --sky:#2E86BE; --sky-bright:#41A8DE; --silver:#8496A6; --line:rgba(18,30,44,.14);
@@ -15,7 +25,7 @@
   }
   *{box-sizing:border-box;margin:0}
   html{scroll-behavior:smooth}
-  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{padding-top:46px;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--sky);color:#fff}
   h1,h2{font-family:'Archivo Black',sans-serif;font-weight:400;line-height:1.05;letter-spacing:-.01em}
   h1{font-size:clamp(2.3rem,6.5vw,4.6rem)}
@@ -77,6 +87,20 @@
 </style>
 </head>
 <body>
+<nav>
+  <div class="in">
+    <a class="lg" href="https://hamoandrew-oss.github.io/AHE/showcase.html">
+      <svg width="20" height="20" viewBox="0 0 100 100" aria-hidden="true"><polygon points="45,8 55,8 24,92 13,92" fill="#1E4B8F"/><polygon points="45,8 55,8 71,52 60,52" fill="#1E4B8F"/><rect x="18" y="46" width="24" height="8" fill="#8496A6"/><rect x="60" y="46" width="27" height="8" fill="#8496A6"/><polygon points="46,22 54,22 54,92 46,92" fill="#41A8DE"/><rect x="54" y="58" width="22" height="8" fill="#41A8DE"/><polygon points="68,66 78,66 87,92 77,92" fill="#41A8DE"/></svg>
+      GRIDLINE
+    </a>
+    <a class="lnk" href="https://hamoandrew-oss.github.io/AHE/showcase.html">HOME</a>
+    <a class="lnk" href="https://hamoandrew-oss.github.io/AHE/features.html">FULL DETAIL</a>
+    <a class="lnk" href="#pilot">PILOT</a>
+    <span class="sp"></span>
+    <a class="app" href="https://hamoandrew-oss.github.io/AHE/">OPEN THE APP</a>
+  </div>
+</nav>
+
 
 <!-- ══ HERO ══ -->
 <section class="dark" style="padding-top:clamp(90px,14vh,160px)">
