@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDLINE — Contracts: how to use it</title>
+<meta name="description" content="Instructions for the Contracts section of GRIDLINE — early warnings, instructions, compensation events, the action inbox, cost build-ups, formal issue and the Contract Copilot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#16222F; --ink:#1B2530; --muted:#5E6E7F; --faint:#8B98A5; --line:#D5DBE1; --bg:#F1F3F5; --panel:#FFFFFF; --sky:#2B8FC7; --amber:#D98E2B; --red:#BE4E36; --green:#2E9E62; --purple:#6B4FA3; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; font-size:16px; line-height:1.55; }
+  a { color:var(--sky); }
+  .nav { position:sticky; top:0; z-index:5; background:var(--navy); color:#fff; display:flex; align-items:center; gap:22px; padding:12px 22px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em; }
+  .nav .brand { font-family:'Archivo Black',sans-serif; font-size:15px; letter-spacing:.04em; margin-right:auto; }
+  .nav a { color:#C9D4DE; text-decoration:none; }
+  .nav a.cta { background:var(--sky); color:#fff; padding:7px 12px; }
+  .wrap { max-width:860px; margin:0 auto; padding:40px 22px 90px; }
+  h1 { font-family:'Archivo Black',sans-serif; font-size:clamp(30px,6vw,46px); line-height:1.05; margin:0 0 14px; letter-spacing:-.01em; }
+  .lede { font-size:18px; color:var(--muted); max-width:640px; margin-bottom:34px; }
+  h2 { font-family:'Archivo Black',sans-serif; font-size:22px; margin:54px 0 12px; padding-top:18px; border-top:3px solid var(--navy); }
+  h3 { font-size:16px; font-weight:700; margin:26px 0 6px; }
+  p { max-width:680px; }
+  ol,ul { max-width:680px; padding-left:22px; }
+  li { margin:6px 0; }
+  ol.steps { counter-reset:s; list-style:none; padding:0; }
+  ol.steps li { counter-increment:s; position:relative; padding:10px 0 10px 46px; border-bottom:1px solid var(--line); }
+  ol.steps li::before { content:counter(s); position:absolute; left:0; top:9px; width:30px; height:30px; background:var(--navy); color:#fff; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .ui { font-family:'IBM Plex Mono',monospace; font-size:12.5px; background:#fff; border:1px solid var(--line); padding:1px 6px; white-space:nowrap; }
+  .chip { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; padding:2px 7px; color:#fff; margin:0 2px; }
+  .flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:14px 0 6px; font-family:'IBM Plex Mono',monospace; font-size:12px; }
+  .flow .box { border:2px solid var(--navy); padding:8px 12px; background:#fff; }
+  .flow .arrow { color:var(--faint); }
+  .note { border-left:4px solid var(--amber); background:#fff; padding:12px 16px; margin:18px 0; max-width:680px; }
+  .note.blue { border-color:var(--sky); }
+  .note.red { border-color:var(--red); }
+  table { border-collapse:collapse; width:100%; max-width:760px; font-size:14px; margin:12px 0 4px; background:#fff; }
+  th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--muted); font-weight:500; }
+  .toc { background:#fff; border:1px solid var(--line); padding:16px 20px; margin:0 0 10px; columns:2; column-gap:30px; max-width:680px; }
+  .toc a { display:block; text-decoration:none; color:var(--ink); padding:3px 0; font-size:14.5px; break-inside:avoid; }
+  .toc a span { font-family:'IBM Plex Mono',monospace; color:var(--faint); font-size:11px; margin-right:8px; }
+  .foot { margin-top:70px; padding-top:18px; border-top:1px solid var(--line); font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--faint); letter-spacing:.06em; }
+  @media (max-width:640px){ .toc{columns:1;} .nav{gap:14px; padding:10px 14px;} .nav a:not(.cta):not(.brand){display:none;} }
+  @media print { .nav{display:none;} body{background:#fff;} .wrap{padding:0;} h2{break-after:avoid;} }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span class="brand">GRIDLINE</span>
+  <a href="https://hamoandrew-oss.github.io/AHESHOW/">HOME</a>
+  <a href="https://hamoandrew-oss.github.io/AHESHOW/features.html">FULL DETAIL</a>
+  <a href="https://hamoandrew-oss.github.io/AHESHOW/pricing.html">PILOT</a>
+  <a class="cta" href="https://hamoandrew-oss.github.io/AHE/">OPEN THE APP</a>
+</nav>
+
+<div class="wrap">
+  <h1>Contracts.<br>How to use it.</h1>
+  <p class="lede">The Contracts section is not a replacement for CEMAR or Sypro. It is the radar and the preparation room: GRIDLINE already knows the programme, the parts, the snags and the minutes, so it spots what may need a contract event, helps you prepare it with the evidence attached, and tracks the deadline once you have posted it wherever the client wants it. Money stays in each job's Commercial tab; the paper trail lives here; the two are joined.</p>
+
+  <div class="toc">
+    <a href="#idea"><span>1</span>The idea in one minute</a>
+    <a href="#setup"><span>2</span>Set up a contract, say where it lives</a>
+    <a href="#morning"><span>3</span>The morning routine: Radar</a>
+    <a href="#ew"><span>4</span>Early warnings</a>
+    <a href="#ins"><span>5</span>Instructions</a>
+    <a href="#ce"><span>6</span>Compensation events</a>
+    <a href="#cost"><span>7</span>Pricing a CE</a>
+    <a href="#formal"><span>8</span>The paperwork: prep for CEMAR, or issue here</a>
+    <a href="#evidence"><span>9</span>Evidence and links</a>
+    <a href="#payment"><span>10</span>Getting agreed money paid</a>
+    <a href="#inbox"><span>11</span>The three tabs and the four-part page</a>
+    <a href="#copilot"><span>12</span>Contract Copilot</a>
+    <a href="#site"><span>13</span>From site: snag to early warning</a>
+    <a href="#health"><span>14</span>Contract health, explained</a>
+    <a href="#audit"><span>15</span>Who did what — audit and access</a>
+    <a href="#glossary"><span>16</span>Plain-English glossary</a>
+  </div>
+
+  <h2 id="idea">1. The idea in one minute</h2>
+  <p>Three kinds of event, chained together, numbered automatically:</p>
+  <div class="flow">
+    <span class="box">EW-001 early warning</span><span class="arrow">→</span>
+    <span class="box">INS-001 instruction</span><span class="arrow">→</span>
+    <span class="box">CE-001 compensation event</span><span class="arrow">→</span>
+    <span class="box">VO in the Commercial tab</span>
+  </div>
+  <p>You spot a risk and raise an <b>early warning</b>. The client instructs a change with an <b>instruction</b>. The instruction costs money or time, so it becomes a <b>compensation event</b> you price, they assess, and you agree. Once agreed, one tap puts it into the job's variation register so your next application for payment includes it. Every step is dated, linked to the last, and written to the audit trail.</p>
+  <p>Where the formal notice actually gets posted depends on the contract: the client's CEMAR, their Sypro, an email — or GRIDLINE itself for your own subcontracts. GRIDLINE prepares the wording and the evidence pack, you post it in thirty seconds, and you record the reference back here so the deadline is tracked where you actually look every morning.</p>
+  <p>Everything in Contracts belongs to a job. A contract is created inside a job; its events sit on that contract; the dashboard and inbox read across every job at once.</p>
+
+  <h2 id="setup">2. Set up a contract, say where it lives</h2>
+  <ol class="steps">
+    <li>Open <span class="ui">CONTRACTS</span> in the sidebar, then the <span class="ui">SET-UP</span> tab.</li>
+    <li>Press <span class="ui">+ CONTRACT</span>, pick the job, then <span class="ui">MAIN CONTRACT</span> (you and the client) or <span class="ui">SUBCONTRACT</span> (you and a subcontractor).</li>
+    <li>Choose where it is <b>administered</b>: <span class="ui">CEMAR</span>, <span class="ui">SYPRO</span>, <span class="ui">EMAIL</span> or <span class="ui">GRIDLINE</span>. Main contracts default to CEMAR, subcontracts to GRIDLINE. This one setting decides what the paperwork section on every event says.</li>
+    <li>A main contract reads its client and value live from the job's Commercial tab — change the sum there and it changes here. Add the reference — for example <span class="ui">NEC4 ECC Option A</span> — dates, project manager and commercial manager. It saves as you type.</li>
+    <li>Set the status to <span class="chip" style="background:var(--sky)">ACTIVE</span>. Events can now be raised on it.</li>
+  </ol>
+  <div class="note blue">One main contract per job is normal. Add a subcontract for each subcontractor you want to administer formally — events on a subcontract can be linked to events on the main contract without anything being copied between them.</div>
+
+  <h2 id="morning">3. The morning routine: Radar</h2>
+  <p>Open Contracts and stay on the <span class="ui">RADAR</span> tab. Read it top to bottom:</p>
+  <ul>
+    <li><b>Contract health</b> per job — a percentage that explains its own deductions (section 14).</li>
+    <li><b>The six counters</b> — open early warnings, open CEs, outstanding instructions, overdue, <b>not yet posted</b> (events you have raised but not yet put into CEMAR or Sypro), and radar findings.</li>
+    <li><b>Commercial exposure</b> — what's potential, notified, quoted, assessed, agreed and implemented, kept separate so a risk estimate never looks like agreed money. Tap any of the largest CEs to open it.</li>
+    <li><b>Needs you</b> — every open item ranked by deadline, money at stake, risk and status, grouped Overdue / Today / Next 7 days. <span class="ui">OPEN</span>, <span class="ui">ASSIGN</span>, <span class="ui">DONE</span> on each.</li>
+    <li><b>Radar found</b> — things GRIDLINE noticed in the job's own records that may need a contract event but have none: parts delayed from a supplier, a task well past its finish, a meeting minute that reads like an instruction ("please proceed", "revise the detail"), a certificate short of the application, a proposed variation unanswered for a fortnight, a site record open for weeks. No AI involved — it is always on. <span class="ui">RAISE EW</span> / <span class="ui">RAISE CE</span> / <span class="ui">RAISE INS</span> creates the event with the evidence already linked; <span class="ui">DISMISS</span> silences that finding.</li>
+    <li><b>Copilot</b> — the deeper AI pass, when you ask for it.</li>
+  </ul>
+  <p>The main GRIDLINE dashboard's Today list also carries your nearest contract deadlines and any agreed money not yet in payment, so you don't have to open Contracts to be reminded.</p>
+
+  <h2 id="ew">4. Early warnings</h2>
+  <p>Raise one the moment you think something could increase cost, delay completion or affect the work — the contract rewards early notice and punishes silence.</p>
+  <ol class="steps">
+    <li>On the <span class="ui">EARLY WARNINGS</span> tab press <span class="ui">+ EARLY WARNING</span> and pick the contract. It's numbered EW-001, EW-002… within that contract.</li>
+    <li>Give it a title and description. On a phone, <span class="ui">🎙 VOICE</span> dictates straight into the description.</li>
+    <li>Set the risk (<span class="chip" style="background:var(--green)">LOW</span> <span class="chip" style="background:var(--amber)">MEDIUM</span> <span class="chip" style="background:var(--red)">HIGH</span>), the potential cost, the programme impact, the owner and a due date for the response.</li>
+    <li>Record what was agreed at the risk-reduction meeting in <span class="ui">ACTIONS AGREED</span>.</li>
+    <li>Move the status along the ladder: <span class="chip" style="background:var(--faint)">DRAFT</span> <span class="chip" style="background:var(--amber)">OPEN</span> <span class="chip" style="background:#4A7FC9">UNDER REVIEW</span> <span class="chip" style="background:var(--red)">ACTION REQUIRED</span> <span class="chip" style="background:var(--green)">CLOSED</span>.</li>
+  </ol>
+  <p>From an early warning you can press <span class="ui">RAISE INSTRUCTION FROM THIS</span> or <span class="ui">RAISE COMPENSATION EVENT</span> — the new event arrives already linked.</p>
+
+  <h2 id="ins">5. Instructions</h2>
+  <p>An instruction records what the project manager told you to do — a changed detail, a stopped activity, a new requirement. Record who issued it, who it was issued to, and the date. Status runs <span class="chip" style="background:var(--amber)">ISSUED</span> → <span class="chip" style="background:#4A7FC9">ACTIONED</span> → <span class="chip" style="background:var(--green)">CLOSED</span>. An instruction outstanding for more than a week counts against contract health.</p>
+  <p>If the instruction changes the price or the programme, press <span class="ui">RAISE COMPENSATION EVENT</span> on it. The CE carries the instruction's description and links across.</p>
+
+  <h2 id="ce">6. Compensation events</h2>
+  <p>The CE is where money and time are settled. Its status ladder mirrors the contract's own sequence:</p>
+  <table>
+    <tr><th>Status</th><th>Means</th><th>Counts as</th></tr>
+    <tr><td>Potential</td><td>You think a CE may arise but haven't notified</td><td>Potential exposure</td></tr>
+    <tr><td>Notified</td><td>Notified to the other party</td><td>Notified</td></tr>
+    <tr><td>Quotation required</td><td>They've asked you to price it</td><td>Notified — and it's in your inbox</td></tr>
+    <tr><td>Quotation submitted</td><td>Your price is in</td><td>Quoted</td></tr>
+    <tr><td>Under assessment</td><td>The PM is assessing it</td><td>Assessed</td></tr>
+    <tr><td>Accepted</td><td>Agreed — put it into payment (section 10)</td><td>Agreed</td></tr>
+    <tr><td>Rejected</td><td>Not accepted — record why in the internal workspace</td><td>—</td></tr>
+    <tr><td>Implemented</td><td>In the contract sum and in an application</td><td>Implemented</td></tr>
+    <tr><td>Closed</td><td>Finished with</td><td>Implemented</td></tr>
+  </table>
+  <p>Fill in the reason (the clause or cause), the responsible person and a due date for the next response. The four values — estimated, quoted, assessed, agreed — are visible only in PM mode.</p>
+
+  <h2 id="cost">7. Pricing a CE</h2>
+  <p>Stop opening Excel. Every CE has a <b>cost build-up</b>:</p>
+  <ol class="steps">
+    <li>In the <span class="ui">+ add line…</span> menu pick a category — labour, plant, materials, subcontractors, temporary works, design, preliminaries, delay, risk or other.</li>
+    <li>Type a description, quantity, unit and rate. The line total and the grand total calculate as you go.</li>
+    <li>In <span class="ui">EVIDENCE</span> on each line, note where the number comes from — the timesheet week, the hire ticket, the supplier quote reference. It appears in the evidence list automatically.</li>
+    <li>Press <span class="ui">USE AS QUOTATION</span> to copy the total into the quoted value.</li>
+    <li>Below the lines, the strip shows estimate → quotation → assessment → agreed → actual with the variance between each stage. Fill the actual cost in later to see what the job really made on it.</li>
+    <li><span class="ui">EXPORT CSV</span> gives the whole build-up as a spreadsheet for anyone who insists.</li>
+  </ol>
+
+  <h2 id="formal">8. The paperwork: prep for CEMAR, or issue here</h2>
+  <p>The last section of every event page has two boxes that look different on purpose.</p>
+  <p><b style="color:var(--amber)">Internal workspace</b> (amber) is yours: strategy, your real view of the cost, negotiation position, management comments. It never leaves GRIDLINE and is never part of what you issue.</p>
+  <p><b style="color:var(--sky)">The blue box</b> changes with the contract's administered-in setting.</p>
+  <h3>Contract administered in CEMAR, Sypro or email</h3>
+  <ol class="steps">
+    <li>Write the wording in the draft box — or <span class="ui">DRAFT WITH COPILOT</span> and edit the result. <span class="ui">COPY WORDING</span> puts it on the clipboard for pasting into CEMAR.</li>
+    <li>Press <span class="ui">READY FOR CEMAR — BUILD EVIDENCE PACK</span>. One file downloads: the event, the wording, the cost build-up, every linked record, and every photo and drawing embedded, on your letterhead. It prints to PDF from the browser. Attach it in CEMAR.</li>
+    <li>Back in GRIDLINE, type the <b>CEMAR reference</b>, the date you posted it, and the <b>response date CEMAR gave you</b>. From then on the deadline lives in the radar, and the event shows <span class="chip" style="background:var(--green)">IN CEMAR</span>. Until you do, the register shows it as <span class="chip" style="background:var(--amber)">NOT IN CEMAR</span> and the radar counts it under "not yet posted".</li>
+  </ol>
+  <h3>Contract administered in GRIDLINE (your own subcontracts)</h3>
+  <ol class="steps">
+    <li>Write the formal wording in the draft box — or press <span class="ui">DRAFT WITH COPILOT</span> to have it drafted from the event's own fields and linked evidence. Read it. Edit it. It's a draft, not a decision.</li>
+    <li>Press <span class="ui">ISSUE FORMALLY</span> and confirm. The text is locked with its version number, date and device.</li>
+    <li>Need to correct an issued notice? Draft again and issue as v2. Version 1 stays on the record — corrections supersede, they never overwrite.</li>
+    <li>For a paper or PDF copy, print the event page from the browser.</li>
+  </ol>
+  <div class="note red">Nothing is issued automatically — not by the Copilot, not by the radar, not by a status change. The evidence pack is a preparation, not a notice; only you post it, and only the confirm on <span class="ui">ISSUE FORMALLY</span> creates a formal record here.</div>
+
+  <h2 id="evidence">9. Evidence and links</h2>
+  <p>A CE that can't show its evidence is an argument. Every event can carry and link:</p>
+  <ul>
+    <li><b>Attachments</b> — photos and PDFs straight from the phone, viewable in place.</li>
+    <li><b>Programme</b> — link the affected activities; the event shows their dates and how late they are, and you set programme impact to none, potential or confirmed with a number of days.</li>
+    <li><b>Drawings</b> — link sheets from the job's drawing folders.</li>
+    <li><b>Site records</b> — link snags; their photos become evidence too.</li>
+    <li><b>Other contracts</b> — link a main-contract CE to the subcontract instruction it caused. If a main-contract event has subcontracts on the job and no downstream link, a warning reminds you to consider one. Linking copies nothing between contracts.</li>
+  </ul>
+  <p><span class="ui">SHOW SUPPORTING EVIDENCE</span> gathers everything across the whole chain — the early warning's photos, the instruction's PDF, the CE's cost evidence, the linked site records and their pictures, the comments — into one list. That is your bundle if it ever goes further than the site cabin.</p>
+  <p>The <b>event timeline</b> on each page draws the chain in date order — site record, early warning, formal issue, instruction, CE, quotation, agreement, payment — and every item is a link.</p>
+
+  <h2 id="payment">10. Getting agreed money paid</h2>
+  <p>This is the step legacy systems lose. When a CE reaches <span class="chip" style="background:var(--green)">ACCEPTED</span> with an agreed value, the page shows a red banner until you press <span class="ui">INCLUDE IN PAYMENT</span>. That creates an instructed variation in the job's Commercial tab with the agreed value and a back-link, so the adjusted contract sum, OWED and AT RISK, and your next application all pick it up. Agreed-but-not-in-payment money is flagged on the dashboard, in the inbox and on the Today list until it's done.</p>
+
+  <h2 id="inbox">11. The three tabs and the four-part page</h2>
+  <p>The section has three tabs, and they map onto three jobs: <span class="ui">RADAR</span> is what needs you; <span class="ui">EVENTS</span> is one register of every early warning, instruction and CE, with type chips, open/closed, search and <span class="ui">+ RAISE</span>; <span class="ui">SET-UP</span> is the contracts themselves, which you touch once per job.</p>
+  <p>Every event page — EW, instruction or CE alike — has the same four parts, so you learn the layout once:</p>
+  <table>
+    <tr><th>Part</th><th>What is in it</th><th>Open by default</th></tr>
+    <tr><td>The facts</td><td>Reference, title, status, description (with voice dictation), who, when, due, risk or reason, and the raise-next buttons</td><td>Yes — it fits a phone</td></tr>
+    <tr><td>The story</td><td>Timeline, related events, links to programme, drawings, site records and other contracts, attachments, supporting evidence</td><td>Collapsed, shows how many links</td></tr>
+    <tr><td>Money and time</td><td>CE: cost build-up and the five values; EW: potential cost and programme impact. PM mode only</td><td>Collapsed, shows the current value</td></tr>
+    <tr><td>The paperwork</td><td>Internal notes, prep-for-CEMAR or formal issue, external reference and date, comments</td><td>Collapsed, shows posted / not posted</td></tr>
+  </table>
+
+  <h2 id="copilot">12. Contract Copilot</h2>
+  <p>On the dashboard, press <span class="ui">SCAN THIS JOB</span>. The Copilot reads the job's own records — open snags, meeting minutes, open actions, delayed parts, late tasks — and lists <b>potential contract events</b> you may not have raised: an early warning nobody wrote, an instruction given informally in a meeting, a delay that may be a CE. Each one says why, cites its evidence and gives a confidence level.</p>
+  <p>Your choices: <span class="ui">REVIEW</span> the reasoning, <span class="ui">RAISE EARLY WARNING</span> or <span class="ui">CREATE CE</span> (the evidence links come across), <span class="ui">LINK EXISTING EVENT</span> if it's already covered, or <span class="ui">DISMISS</span>. It suggests; you decide. It cannot issue anything.</p>
+  <div class="note">The Copilot and drafting need an Anthropic API key on the hosted app — <span class="ui">KEY ▸ API</span> in the sidebar. The key stays in your browser.</div>
+
+  <h2 id="site">13. From site: snag to early warning</h2>
+  <p>You don't need the Contracts screen to start a contract event. On any open snag in a job that has a contract, press <span class="ui">→ EW</span>. A draft early warning is created on the main contract with the snag's description, its photos linked as evidence, and the original capture date preserved on the record. Complete and issue it later from a desk. The snag shows <span class="ui">EW LINKED</span> so nobody raises it twice.</p>
+
+  <h2 id="health">14. Contract health, explained</h2>
+  <p>Health starts at 100 and only moves for reasons it shows you:</p>
+  <table>
+    <tr><th>Deduction</th><th>Why it matters</th></tr>
+    <tr><td>Overdue responses</td><td>Missed contractual deadlines lose entitlement</td></tr>
+    <tr><td>Open high-risk early warnings</td><td>Unmanaged risk to cost or programme</td></tr>
+    <tr><td>High-value unresolved CEs (over £25k or 10% of the contract)</td><td>Big money still in dispute</td></tr>
+    <tr><td>Programme-critical events</td><td>Confirmed impact on completion</td></tr>
+    <tr><td>Instructions outstanding over 7 days</td><td>Work instructed but not actioned</td></tr>
+    <tr><td>Agreed CEs not in payment</td><td>Money you've won but haven't applied for</td></tr>
+  </table>
+  <p>85% and above reads Healthy; 65–84% Attention required; below that, At risk. Fix the listed items and the number follows — there's nothing else in it.</p>
+
+  <h2 id="audit">15. Who did what — audit and access</h2>
+  <p>Every change to a contract event — raised, status moved, value changed, comment added, attachment added, formally issued, included in payment, Copilot suggestion accepted or dismissed — is written to the activity log in <span class="ui">Settings</span> with the date, time, device and role. Name each device in Settings so the log is worth reading. Formal records are never edited in place.</p>
+  <p>In <b>Site Mode</b> the section is visible but money is hidden: site staff can raise early warnings, read instructions and complete their own items, and never see CE values or the internal workspace figures. PM mode sees everything. Fuller named roles arrive with team accounts.</p>
+
+  <h2 id="glossary">16. Plain-English glossary</h2>
+  <table>
+    <tr><th>Term</th><th>Meaning here</th></tr>
+    <tr><td>Early warning (EW)</td><td>A notice that something could cost money, delay the job or affect the work. Raise early; the contract expects it.</td></tr>
+    <tr><td>Instruction (INS)</td><td>A direction from the project manager to change, stop or add something.</td></tr>
+    <tr><td>Compensation event (CE)</td><td>An event the contract says is the client's risk — you're entitled to time and money for it, once notified, quoted and assessed.</td></tr>
+    <tr><td>Quotation</td><td>Your price and programme effect for a CE.</td></tr>
+    <tr><td>Assessment</td><td>The project manager's view of what the CE is worth, if they don't accept your quotation.</td></tr>
+    <tr><td>Implemented</td><td>The agreed CE is in the contract sum and being paid.</td></tr>
+    <tr><td>Main contract / subcontract</td><td>Upstream (you and the client) / downstream (you and your subcontractor). Events on each can be linked without sharing content.</td></tr>
+    <tr><td>Internal workspace</td><td>Your private notes on an event. Never issued.</td></tr>
+    <tr><td>Formal contract record</td><td>What was actually issued, locked by version.</td></tr>
+    <tr><td>Exposure</td><td>Money that may be coming or going but isn't agreed yet. Kept separate from agreed change.</td></tr>
+  </table>
+
+  <div class="foot">GRIDLINE · ANDREW HAMILTON ENGINEERING · hamo.andrew@gmail.com</div>
+</div>
+</body>
+</html>
