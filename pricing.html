@@ -16,7 +16,17 @@
   nav a.lnk:hover{color:#fff}
   nav .sp{flex:1}
   nav a.app{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;color:#fff;background:#2274A8;text-decoration:none;padding:8px 16px}
-  @media(max-width:760px){nav a.lnk{display:none}nav .in{gap:10px}}
+  /* mobile nav — cross-page links stay so no page is a dead end on a phone;
+     in-page anchors drop (you scroll to those anyway), wordmark and button label
+     shrink to buy the width. Same nav height, so nothing below it moves. */
+  @media(max-width:760px){
+    nav .in{gap:9px;padding:11px 12px}
+    nav a.lnk{display:none}
+    nav a.lnk[href^="https://"]{display:inline;font-size:9px;letter-spacing:.08em}
+    nav .lg{font-size:0;gap:0}
+    nav a.app{font-size:0;padding:8px 13px}
+    nav a.app::after{content:"APP";font-size:11px;letter-spacing:.08em}
+  }
 
   :root{
     --navy:#0C1523; --navy2:#111C2E; --ink:#151F2B; --paper:#F2F3F5; --panel:#FFFFFF;
@@ -94,7 +104,7 @@
       GRIDLINE
     </a>
     <a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/">HOME</a>
-    <a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/features.html">FULL DETAIL</a>
+    <a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/features.html">FULL DETAIL</a><a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/contracts-guide.html">CONTRACTS</a>
     <a class="lnk" href="#pilot">PILOT</a>
     <span class="sp"></span>
     <a class="app" href="https://hamoandrew-oss.github.io/AHE/">OPEN THE APP</a>
@@ -233,7 +243,7 @@
     <div class="faq rv d1">
       <details><summary>Is my data safe?</summary><p>Today, in solo mode, your data lives in your own browser — it never touches our servers, which is as private as it gets. Team accounts add a secured, UK/EU-hosted database with server-enforced roles, and your data exports with one click whenever you want out. We're contractors: we wouldn't put our own subcontractor payment records anywhere we didn't trust, and ours run on this.</p></details>
       <details><summary>Why is the app free right now?</summary><p>Because charging money means accounts, billing and support obligations, and we'd rather finish those properly than fake them. The solo app is complete and genuinely free; the pilot bridges the gap; pricing starts when team accounts are real.</p></details>
-      <details><summary>What does the ACC integration do?</summary><p>Today: import your Form detail report and 451 checksheets land in the handover file in one click, statuses updating on every re-import. Coming: live connection — drawings revisions, RFIs, and forms syncing without the export step.</p></details>
+      <details><summary>What does the ACC integration do?</summary><p>Today: import your Form detail report and the whole set of checksheets lands in the handover file in one click, however many there are — statuses updating on every re-import. Coming: live connection — drawings revisions, RFIs, and forms syncing without the export step.</p></details>
       <details><summary>What happens if you disappear?</summary><p>Fair question to ask any small vendor. Your data is exportable at any time, and the solo app runs entirely in your browser without our servers even existing. You are never locked in and never locked out.</p></details>
       <details><summary>We're bigger than 15 people — does it still fit?</summary><p>Probably, and the flat price gets more comical the bigger your crew. If you're a main contractor wanting your supply chain on it, that's the third column — talk to us.</p></details>
     </div>

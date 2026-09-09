@@ -42,7 +42,11 @@
   .toc a { display:block; text-decoration:none; color:var(--ink); padding:3px 0; font-size:14.5px; break-inside:avoid; }
   .toc a span { font-family:'IBM Plex Mono',monospace; color:var(--faint); font-size:11px; margin-right:8px; }
   .foot { margin-top:70px; padding-top:18px; border-top:1px solid var(--line); font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--faint); letter-spacing:.06em; }
-  @media (max-width:640px){ .toc{columns:1;} .nav{gap:14px; padding:10px 14px;} .nav a:not(.cta):not(.brand){display:none;} }
+  /* mobile nav — keep the links out to the rest of the site; shrink to fit one row */
+  @media (max-width:640px){ .toc{columns:1;} .nav{gap:10px; padding:10px 12px; font-size:9px; letter-spacing:.08em;}
+    .nav .brand{font-size:11px;}
+    .nav a.cta{font-size:0; padding:7px 11px;}
+    .nav a.cta::after{content:"APP"; font-size:10px; letter-spacing:.08em;} }
   @media print { .nav{display:none;} body{background:#fff;} .wrap{padding:0;} h2{break-after:avoid;} }
 </style>
 </head>
@@ -50,7 +54,7 @@
 <nav class="nav">
   <span class="brand">GRIDLINE</span>
   <a href="https://hamoandrew-oss.github.io/AHESHOW/">HOME</a>
-  <a href="https://hamoandrew-oss.github.io/AHESHOW/features.html">FULL DETAIL</a>
+  <a href="https://hamoandrew-oss.github.io/AHESHOW/features.html">FULL DETAIL</a><a href="https://hamoandrew-oss.github.io/AHESHOW/contracts-guide.html" style="color:#41A8DE">CONTRACTS</a>
   <a href="https://hamoandrew-oss.github.io/AHESHOW/pricing.html">PILOT</a>
   <a class="cta" href="https://hamoandrew-oss.github.io/AHE/">OPEN THE APP</a>
 </nav>

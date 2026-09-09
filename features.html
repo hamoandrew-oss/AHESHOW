@@ -193,7 +193,17 @@
   nav a.lnk:hover{color:#fff}
   nav .sp{flex:1}
   nav a.app{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;color:#fff;background:var(--sky);text-decoration:none;padding:8px 16px}
-  @media(max-width:760px){nav a.lnk{display:none}nav .in{gap:10px}}
+  /* mobile nav — cross-page links stay so no page is a dead end on a phone;
+     in-page anchors drop (you scroll to those anyway), wordmark and button label
+     shrink to buy the width. Same nav height, so nothing below it moves. */
+  @media(max-width:760px){
+    nav .in{gap:9px;padding:11px 12px}
+    nav a.lnk{display:none}
+    nav a.lnk[href^="https://"]{display:inline;font-size:9px;letter-spacing:.08em}
+    nav .lg{font-size:0;gap:0}
+    nav a.app{font-size:0;padding:8px 13px}
+    nav a.app::after{content:"APP";font-size:11px;letter-spacing:.08em}
+  }
   /* pilot strip */
   .pstrip{display:block;background:linear-gradient(90deg,var(--sky),#1E5F8C);color:#fff;text-decoration:none;text-align:center;padding:11px 16px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em}
   .pstrip b{color:#fff}
@@ -253,7 +263,7 @@
     <a class="lnk" href="#ai">AI PM</a>
     <a class="lnk" href="#compliance">COMPLIANCE</a>
     <a class="lnk" href="#revs">REVISIONS</a>
-    <a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/pricing.html">PRICING</a>
+    <a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/contracts-guide.html">CONTRACTS</a><a class="lnk" href="https://hamoandrew-oss.github.io/AHESHOW/pricing.html">PRICING</a>
     <span class="sp"></span>
     <a class="app" href="https://hamoandrew-oss.github.io/AHE/">OPEN THE APP</a>
   </div>
